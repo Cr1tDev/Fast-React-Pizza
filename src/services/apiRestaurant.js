@@ -18,6 +18,7 @@ export async function getOrder(id) {
   return data;
 }
 
+// Sends a new object order from my app to the backend as JSON using a POST request
 export async function createOrder(newOrder) {
   try {
     const res = await fetch(`${API_URL}/order`, {
@@ -36,6 +37,7 @@ export async function createOrder(newOrder) {
   }
 }
 
+// Updates specific fields of an existing order on the server using PATCH, and throws an error if anything goes wrong.
 export async function updateOrder(id, updateObj) {
   try {
     const res = await fetch(`${API_URL}/order/${id}`, {

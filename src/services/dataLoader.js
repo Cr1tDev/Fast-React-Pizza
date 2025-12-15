@@ -1,9 +1,11 @@
-import { redirect } from "react-router-dom";
-import { createOrder, getMenu, getOrder } from "./apiRestaurant";
+import { redirect } from 'react-router-dom';
+import { createOrder, getMenu, getOrder } from './apiRestaurant';
+import store from '../store';
+import { clearCart } from '../features/cart/cartSlice';
 
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str
+    str,
   );
 
 export async function menuLoader() {
@@ -27,18 +29,21 @@ export async function actionLoader({ request }) {
   const order = {
     ...data,
     cart: JSON.parse(data.cart),
-    priority: data.priority === "on",
+    priority: data.priority === 'true',
   };
 
   // Error handling early return we can display the data by using useActionData inside component which the funtion is connected
   const errors = {};
   if (!isValidPhone(order.phone))
     errors.phone =
-      "Please give us your correct phone number. We might need it to contact you.";
+      'Please give us your correct phone number. We might need it to contact you.';
   if (Object.keys(errors).length > 0) return errors;
 
   // New order Object comming from an api
   const newOrder = await createOrder(order);
+
+  // Can effect performance
+  store.dispatch(clearCart());
 
   // create a new response/request url to redirect to a new tab base on the url passed
   return redirect(`/order/${newOrder.id}`);

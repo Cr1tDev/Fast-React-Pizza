@@ -34,10 +34,7 @@
 
   @media (min-width: 768px) {
     .input {
-      padding-left: 1.5rem; /* px-6 */
-      padding-right: 1.5rem;
-      padding-top: 0.75rem; /* py-3 */
-      padding-bottom: 0.75rem;
+      padding: 0.5rem 1.5rem;
     }
   }
 

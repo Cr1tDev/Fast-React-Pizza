@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { menuLoader, orderLoader, actionLoader } from './services/dataLoader';
+import { action as updateOrderAction } from './features/order/action';
 
 import Home from './ui/Home';
 import Menu from './features/menu/Menu';
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
         element: <Order />,
         loader: orderLoader,
         errorElement: <Error />,
+        action: updateOrderAction,
       },
     ],
   },

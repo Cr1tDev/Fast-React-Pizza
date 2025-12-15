@@ -9,6 +9,7 @@ import EmptyCart from './EmptyCart';
 function Cart() {
   const username = useSelector(getUser);
   const cart = useSelector(getCart);
+  console.log(cart);
   const dispatch = useDispatch();
 
   if (!cart.length) return <EmptyCart />;
